@@ -1,0 +1,35 @@
+.picture {
+  max-width: 240px;
+  max-height: 120px;
+  composes: ml-4 from global;
+  composes: mr-4 from global;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  max-width: 272px;
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  max-width: 240px;
+  max-height: 120px;
+  composes: ml-4 from global;
+  composes: mr-4 from global;
+  
+}
+
+.text {
+  composes: text from global;
+  composes: text_type_main-default from global;
+  min-height: 48px;
+  text-align: center;
+  
+}
+.price {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

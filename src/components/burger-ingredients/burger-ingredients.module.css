@@ -2,8 +2,6 @@
   width: 600px;
   display: flex;
   flex-direction: column;
-
-
 }
 
 .title {
@@ -14,32 +12,32 @@
   display:flex;
 
 }
-.image {
-  width: 100%;
-  max-width: 240px;
-  max-height: 120px;
-  composes: ml-4 from global;
-  composes: mr-4 from global;
-  
-}
+
 
 .items {
   display: grid;
   grid-template-columns: repeat(2, minmax(200px, 272px));
   grid-row-gap: 32px;
   grid-column-gap: 24px;
-  overflow-y: scroll;
-  height: 70vh;
 }
-.item {
-  display: flex;
-  flex-direction: column;
-  max-width: 272px;
-  position: relative;
-}
+
 .text {
   composes: text from global;
   composes: text_type_main-default from global;
   min-height: 48px;
   text-align: center;
+}
+
+.title {
+  composes: text from global;
+  composes: text_type_main-medium from global;
+  align-self: flex-start;
+  composes: mb-6 from global;
+}
+
+.scroller {
+  max-height: 900px;
+  overflow-y: auto;
+  scrollbar-color: #8585AD #2F2F37;
+  scrollbar-width: thin;
 }
