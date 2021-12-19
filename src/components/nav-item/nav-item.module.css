@@ -1,0 +1,15 @@
+.link {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration: none;
+  color: #fff;
+  padding: 16px 20px;
+}
+
+.icon {
+  margin-right: 4px;
+  display: flex;
+  color: #8585ad;
+}
