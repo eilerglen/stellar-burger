@@ -1,0 +1,45 @@
+.ingredients {
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+
+
+}
+
+.title {
+  
+}
+
+.tabs {
+  display:flex;
+
+}
+.image {
+  width: 100%;
+  max-width: 240px;
+  max-height: 120px;
+  composes: ml-4 from global;
+  composes: mr-4 from global;
+  
+}
+
+.items {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(200px, 272px));
+  grid-row-gap: 32px;
+  grid-column-gap: 24px;
+  overflow-y: scroll;
+  height: 70vh;
+}
+.item {
+  display: flex;
+  flex-direction: column;
+  max-width: 272px;
+  position: relative;
+}
+.text {
+  composes: text from global;
+  composes: text_type_main-default from global;
+  min-height: 48px;
+  text-align: center;
+}
