@@ -2,7 +2,7 @@ import React from "react";
 import styles from './burger-ingredients.module.css';
 import { Tab, Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Ingredient from '../ingredient/ingredient';
-import Tabs from '../tabs/tabs';
+
 
 export default class BurgerIngredients extends React.Component {
 
@@ -13,7 +13,7 @@ export default class BurgerIngredients extends React.Component {
       return (  
           <section className={styles.ingredients}>
             <h1 className={styles.title}>Соберите бургер</h1>
-            <Tabs current = {this.current} onClick={this.toggleTab}></Tabs>
+    
           <div className={styles.scroller}>
               <h2 className={styles.title}>Булки</h2>
               <div className={styles.items}>
