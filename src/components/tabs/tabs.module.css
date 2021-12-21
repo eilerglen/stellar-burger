@@ -1,0 +1,11 @@
+.items {
+    display: flex;
+    width: 600px;
+    justify-content: space-between;
+    padding-bottom: 50px;
+    box-sizing: border-box;
+}
+.item {
+    cursor: pointer;
+    font-size: 30px;
+}

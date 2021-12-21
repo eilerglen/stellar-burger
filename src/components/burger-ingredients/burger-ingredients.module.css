@@ -41,3 +41,15 @@
   scrollbar-color: #8585AD #2F2F37;
   scrollbar-width: thin;
 }
+
+.tabItem {
+  display: flex;
+  width: 600px;
+  justify-content: space-between;
+  padding-bottom: 50px;
+  box-sizing: border-box;
+}
+.tabItem {
+  cursor: pointer;
+  font-size: 30px;
+}
