@@ -21,6 +21,7 @@ export default class BurgerIngredients extends React.Component {
     })
   }
    componentDidMount () {
+     
     this.state.value = 'buns';
     
     console.log(this.state.value)
@@ -42,7 +43,6 @@ export default class BurgerIngredients extends React.Component {
       const mainTab = this.mainTab 
       return (  
         <section className={styles.ingredients}>
-          
             <h1 className={styles.title}>Соберите бургер</h1>
             <div className={styles.tabItems}>
               <div type = 'buns' className={styles.tabItem} onClick ={() =>{

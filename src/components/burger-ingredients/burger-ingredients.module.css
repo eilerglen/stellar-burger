@@ -42,7 +42,7 @@
   scrollbar-width: thin;
 }
 
-.tabItem {
+.tabItems {
   display: flex;
   width: 600px;
   justify-content: space-between;
