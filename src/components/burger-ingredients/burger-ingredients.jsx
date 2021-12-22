@@ -48,7 +48,7 @@ export default class BurgerIngredients extends React.Component {
         <section className={styles.ingredients}>
             <h1 className={styles.title}>Соберите бургер</h1>
             <div className={styles.tabItems}>
-              <Tabs changeTab = {this.toggleTab.bind(this)}/> 
+              <Tabs value = {this.value} changeTab = {this.toggleTab.bind(this)}/> 
               {/* <div type = 'buns' className={styles.tabItem} 
               onClick ={() =>{this.toggleTab('buns')}}>Булки</div>
 

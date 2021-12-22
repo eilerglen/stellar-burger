@@ -13,7 +13,6 @@
 
 }
 
-
 .items {
   display: grid;
   grid-template-columns: repeat(2, minmax(200px, 272px));
