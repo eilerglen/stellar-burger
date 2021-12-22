@@ -5,16 +5,13 @@ import styles from  './tabs.module.css'
 
 export default class Tabs extends React.Component {
   render(){
-    
     return (
-      <div className={styles.items}>
-        <div type = 'bun' className={styles.item} onClick ={() =>{
-        }}>Булки</div>
-        <div type = 'souce' className={styles.item}>Соусы</div>
-        <div type = 'main' className={styles.item}>Начинки</div>
-      </div>
+    <div className={styles.tabItems}>
+     <div type = 'buns' className={styles.tabItem} onClick ={() => {this.props.changeTab('buns')}}>Булки</div>
+      <div type = 'sauce' className={styles.tabItem} onClick ={()=> {this.props.changeTab('sause')}}>Соусы</div>
+      <div type = 'main' className={styles.tabItem} onClick ={() => {this.props.changeTab('main')}}>Начинки</div>
+    </div>
     );
-
   }
 
 }

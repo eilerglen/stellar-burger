@@ -29,15 +29,18 @@ export default class BurgerIngredients extends React.Component {
    }
 
    componentDidUpdate(prevProps, prevState) {
-    console.log('Jsx update')
-    console.log(this.state.value)
+    this.state.value === 'buns'
+      ? this.bunTab.current.scrollIntoView()
+      : this.state.value === 'sause'
+        ? this.sauceTab.current.scrollIntoView()
+        : this.mainTab.current.scrollIntoView()
   }
 
   render() {
       const bun = this.props.ingredients.filter(ingredient => ingredient.type == 'bun')
       const sause = this.props.ingredients.filter(ingredient => ingredient.type == 'sauce')
       const main = this.props.ingredients.filter(ingredient => ingredient.type == 'main')
-      const currentTab = this.state.value; 
+
       const bunTab = this.bunTab
       const sauceTab = this.sauceTab
       const mainTab = this.mainTab 
@@ -45,26 +48,18 @@ export default class BurgerIngredients extends React.Component {
         <section className={styles.ingredients}>
             <h1 className={styles.title}>Соберите бургер</h1>
             <div className={styles.tabItems}>
-              <div type = 'buns' className={styles.tabItem} onClick ={() =>{
-                this.toggleTab('buns')
-                console.log(currentTab)
-                console.log(bunTab)
-                this.bunTab.current.scrollIntoView()
-              }}>Булки</div>
+              <Tabs changeTab = {this.toggleTab.bind(this)}/> 
+              {/* <div type = 'buns' className={styles.tabItem} 
+              onClick ={() =>{this.toggleTab('buns')}}>Булки</div>
 
-              <div type = 'sauce' className={styles.tabItem} onClick ={() =>{
-                this.toggleTab('sauce')
-                console.log(currentTab)
-                console.log(sauceTab)
-                this.sauceTab.current.scrollIntoView()}}>Соусы</div>
+              <div type = 'sauce' className={styles.tabItem} 
+              onClick ={() =>{this.toggleTab('sauce')
+             }}>Соусы</div>
 
-              <div type = 'main' className={styles.tabItem} onClick ={() =>{
-                 this.toggleTab('main')
-                 console.log(currentTab)
-                 console.log(mainTab)
-                 this.mainTab.current.scrollIntoView()}}>Начинки</div>
+              <div type = 'main' className={styles.tabItem} 
+              onClick ={() =>{this.toggleTab('main')}}>Начинки</div>
+            </div> */}
             </div>
-          
             <div className={styles.scroller}>
               <h2 ref={bunTab} className={styles.title}>Булки</h2>
               <div className={styles.items} >

@@ -1,11 +1,11 @@
-.items {
+.tabItems {
     display: flex;
     width: 600px;
     justify-content: space-between;
     padding-bottom: 50px;
     box-sizing: border-box;
-}
-.item {
+  }
+  .tabItem {
     cursor: pointer;
     font-size: 30px;
-}
+  }
