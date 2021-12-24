@@ -1,9 +1,13 @@
+const {CracoAliasPlugin, configPaths} = require('react-app-rewire-alias')
 const path = require(`path`)
 
 module.exports = {
-  webpack: {
-    alias: {
-      react: path.resolve('./node_modules/react')
+  plugins: [
+    {
+      plugin: CracoAliasPlugin,
+      options: {alias: {
+        react: path.resolve('./node_modules/react')
+      }}
     }
-  },
-} 
+  ]
+}

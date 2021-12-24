@@ -15,12 +15,12 @@ export default class Tabs extends React.Component {
   }
  
   render(){
-    
+    const {value} = this.props
     return (
     <div className={styles.tabItems}>
-      <div type = 'buns' className={styles.tabItem} onClick={() => {this.changeTabValue('buns')}}>Булки</div>
-      <div type = 'sauce' className={styles.tabItem} onClick ={()=> {this.props.changeTab('sause')}}>Соусы</div>
-      <div type = 'main' className={styles.tabItem} onClick ={() => {this.props.changeTab('main')}}>Начинки</div>
+      <Tab value = 'buns' active = {value === 'buns'} className={styles.tabItem} onClick={() => {this.changeTabValue('buns')}}>Булки</Tab>
+      <Tab type = 'sauce' active = {value === 'sause'} className={styles.tabItem} onClick ={()=> {this.props.changeTab('sause')}}>Соусы</Tab>
+      <Tab type = 'main' active = {value === 'main6'} className={styles.tabItem} onClick ={() => {this.props.changeTab('main')}}>Начинки</Tab>
     </div>
     );
   }

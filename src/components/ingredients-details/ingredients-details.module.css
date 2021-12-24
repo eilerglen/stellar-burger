@@ -1,0 +1,23 @@
+.title {
+    
+}
+
+.image {
+    max-width: 240px;
+    max-height: 120px;
+    
+}
+.detail {
+    width: 520px;
+    text-align: center;
+}
+.nutritionlist {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.nutritionitem {
+    min-width: 120px;
+    list-style: none;
+    padding: 0;
+}
