@@ -44,7 +44,7 @@ export default class Ingredient extends React.Component {
         <span className={styles.price}>{this.props.item.price}&nbsp;</span>
         <p className={styles.text}>{this.props.item.name}</p>
         {this.state.isOpenModal && (
-          <Modal title = 'Детали ингредиента' isOpen = {isOpen} onClose = {this.handleClose}>
+          <Modal title = 'Детали ингредиента' isOpen = {isOpen} onClose = {this.handleClose.bind(this)}>
             <IngredientDetails ingredientView = {dataView}/>
           </Modal>
         )}

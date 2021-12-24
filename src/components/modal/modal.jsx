@@ -12,7 +12,7 @@ export default class Modal extends React.Component {
     return createPortal (
         <div className ={modalStyles.modal} >
             <h2>{this.props.title}</h2>
-            <button className={modalStyles.close} onClick={()=>onClose}>
+            <button className={modalStyles.close} onClick={onClose}>
                 <CloseIcon type = 'primary'/>
             </button>
             {this.props.children}
