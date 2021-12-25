@@ -5,3 +5,10 @@
   flex-direction: column;
   justify-content: space-between;
 }
+.scroller {
+  max-height: 450px;
+  overflow-y: auto;
+  scrollbar-color: #8585AD #2F2F37;
+  scrollbar-width: thin;
+
+}
