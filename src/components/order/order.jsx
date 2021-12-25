@@ -10,10 +10,10 @@ export default class Order extends React.Component {
   render() {
       return (
        <div className={orderStyles.order}>
-         <span>{this.props.total}
+         <span className={orderStyles.price}>{this.props.total}
          <CurrencyIcon type="primary"/>
          </span>
-         <button >Оформить заказ</button>
+         <Button >Оформить заказ</Button>
        </div>
       )
   }

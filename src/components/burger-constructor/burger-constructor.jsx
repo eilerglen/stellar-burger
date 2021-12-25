@@ -1,7 +1,9 @@
 import React from "react";
 import styles from './burger-constructor.module.css';
 import Order from '../order/order';
-import { ConstructorElement} from "@ya.praktikum/react-developer-burger-ui-components";
+import IngredientsList from "../ingredient-list/ingredient-list";
+import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+
 
 export default class BurgerConstructor extends React.Component {
   constructor(props){
@@ -12,6 +14,7 @@ export default class BurgerConstructor extends React.Component {
       const bun = this.props.ingredients.find(item => item.type === 'bun')
       return ( 
         <section className={styles.constructor}>
+         {bun &&
           <ConstructorElement
             type ='top'
             isLocked = {true}
@@ -19,7 +22,11 @@ export default class BurgerConstructor extends React.Component {
             price={bun.price}
             thumbnail={bun.image}
           />
-
+          } 
+         <div className={styles.scroller}>
+                <IngredientsList data={this.props.ingredients.filter(item => item.type !== 'bun')} />
+          </div>
+          {bun &&  
           <ConstructorElement
             type ='bottom'
             isLocked = {true}
@@ -27,6 +34,7 @@ export default class BurgerConstructor extends React.Component {
             price={bun.price}
             thumbnail={bun.image}
           />
+          }
         <Order/> 
         </section>
         

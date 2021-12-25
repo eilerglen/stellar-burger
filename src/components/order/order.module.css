@@ -3,3 +3,12 @@
   align-items: center;
   justify-content: flex-end;
 }
+
+.price {
+  display: flex;
+  align-items: center;
+}
+.price svg {
+  width: 43px;
+  height: 43px;
+}
