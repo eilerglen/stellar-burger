@@ -4,11 +4,10 @@ import styles from './ingredient-list.module.css';
 
 export default class IngredientsList extends React.Component {
   constructor(props){
-    super(props);
-    
+    super(props); 
   }
+  
   render() {
-     
       return ( 
         <ul className={ styles.main_container}>
         {this.props.data.map((item) => (

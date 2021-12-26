@@ -8,10 +8,25 @@ import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-comp
 export default class BurgerConstructor extends React.Component {
   constructor(props){
     super(props);
-    
+    this.state = {
+      fillers: this.props.ingredients.filter(item => item.type !== 'bun')
+    }
   }
+
+    componentDidMount() {
+      const data = this.props.ingredients.filter(item => item.type !== 'bun')
+      this.setState({
+        fillers: [] 
+      })
+    }
+
+    componentDidUpdate() {
+      
+    }
+    
   render() {
       const bun = this.props.ingredients.find(item => item.type === 'bun')
+      const total = this.props.ingredients.reduce((acc, p) =>acc + p.price, 0)
       return ( 
         <section className={styles.constructor}>
          {bun &&
@@ -35,7 +50,7 @@ export default class BurgerConstructor extends React.Component {
             thumbnail={bun.image}
           />
           }
-        <Order/> 
+        <Order total={total}/> 
         </section>
         
       )
