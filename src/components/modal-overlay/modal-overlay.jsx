@@ -1,20 +1,15 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import stylesOverlay from './modal-overlay.module.css'
 
-export default class ModalOverlay extends React.Component {
-  constructor(props) {
-    super(props)
-    this.overlayRef = React.createRef();
-  }
+export default function ModalOverlay ({onclick}) {
+ const ModalOverlayRef = useRef(null)
+ const handleClick =(e)=> {
+   if(e.target === ModalOverlayRef.current) {
+    onclick()
+   }
+ }
 
-  render() {
-    const {onClose} = this.props
-    return (
-      <div ref={this.overlayRef} className={stylesOverlay.overlay} onClick = {(e) => {
-        if(e.target = this.overlayRef.current) {
-          this.props.click(e)
-        }
-      }}></div>
-    )  
-  }
+  return (
+    <div ref={ModalOverlayRef} className={stylesOverlay.overlay} onClick ={handleClick}></div>
+  )  
 }

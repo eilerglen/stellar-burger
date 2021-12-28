@@ -4,40 +4,30 @@ import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-co
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 
-export default class Order extends React.Component {
-  state = {
-    isOpen: false
-  }
+export default function Order() {
+  const[isOpen, setOpen] = React.useState(false)
 
-  setIsOpenModal() {
-    this.setState({
-      isOpen: true,
-    })
-  }
+ const handleOpenModal = () => {
+   setOpen(true)
+ }
 
-  handleClose(e){
-    e.stopPropagation();
-    this.setState({
-      isOpen: false,
-    })
-  }
+ const handleCloseModal = () => {
+  setOpen(false)
+}
 
-  render() {
-      const isOpen = this.state.isOpen
-      return (
-       <div className={orderStyles.order}>
+  return (
+    <div className={orderStyles.order}>
          <span className={orderStyles.price}>{this.props.total}
          <CurrencyIcon type="primary"/>
          </span>
-         <Button onClick={()=>{this.setIsOpenModal()}}>Оформить заказ</Button>
+         <Button onClick={ handleOpenModal }>Оформить заказ</Button>
          { isOpen &&
-          <Modal isOpen = {isOpen} onClose = {this.handleClose.bind(this)}>
+          <Modal isOpen = {isOpen} onClose = {handleCloseModal}>
             <OrderDetails/>
           </Modal>
 
          }
-       </div>
-      )
-  }
+    </div>
+  )
 }
 

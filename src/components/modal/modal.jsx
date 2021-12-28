@@ -6,30 +6,24 @@ import ModalOverlay from "../modal-overlay/modal-overlay";
 
 const modalRoot = document.getElementById('modal-root')
 
-export default class Modal extends React.Component {
+export default function Modal({onClose}) {
 
-handleEscClose(e) {
+const handleEscClose = (e) =>{
     if (e.keyCode === 27) {
         this.props.onClose(e)
     }
 }    
 
+React.useEffect(() => {
+    document.addEventListener("keydown", handleEscClose)
+    return ()=> {
+        document.addEventListener("keydown", handleEscClose)
+    }
+})
 
-componentDidMount() {
-    document.addEventListener("keydown", this.handleEscClose.bind(this))
-
-    
-}
-
-componentWillUnmount() {
-    document.removeEventListener("keydown", this.handleEscClose)
-}
-
-render() {
-    const {onClose, isOpen} = this.props
     return createPortal (
         <>
-        <ModalOverlay click = {onClose}/>
+        <ModalOverlay onClick = {onClose}/>
         <div className ={modalStyles.modal} >
             <h2>{this.props.title}</h2>
             <button className={modalStyles.close} onClick={onClose}>
@@ -41,7 +35,5 @@ render() {
         </>
     , modalRoot    
     )
-}   
+    }
     
-
-}

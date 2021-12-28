@@ -8,11 +8,9 @@ import {
 import styles from "./app-header.module.css"
 import NavItem from "../nav-item/nav-item" 
 
-
-export default class AppHeader extends React.Component {
-  render () {
-    return (
-      <header className={styles.header}>
+export default  function AppHeader() {
+  return (
+    <header className={styles.header}>
       <nav className={styles.nav}>
         <ul className= {styles.menu}>
             <li className= {styles.wrapper}>      
@@ -35,7 +33,6 @@ export default class AppHeader extends React.Component {
         </ul> 
       </nav>
         
-      </header>
-    )
-  }
+    </header>
+  )
 }

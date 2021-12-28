@@ -2,10 +2,7 @@ import React  from "react";
 import orderStyles from './order-details.module.css';
 import { ReactComponent as OrderDone } from '../../images/order-done.svg';
 
-export default class OrderDetails extends React.Component {
-
-  
-  render() {
+export default function OrderDetails() {
     return (
       <>
       <span className={orderStyles.order_number}>
@@ -20,7 +17,4 @@ export default class OrderDetails extends React.Component {
 
       </>          
     )
-  }   
-      
-
 }

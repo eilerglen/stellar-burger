@@ -4,33 +4,36 @@ import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import styles from './app.module.css';
 
-export default class App extends React.Component {
-    state = {
-      data: [],
-      loading: true,
-      hasError: false,
-    } 
+export default function App() {
+  const [ingredients, setIngredients] = React.useState([])
   
-  componentDidMount() {
-    fetch("https://norma.nomoreparties.space/api/ingredients")
-    .then(res => res.json())
-    .then(res => 
-      this.setState({data: res.data, loading: false}))
-    .catch(e => console.log(e))
-  }
+  React.useEffect(() => {
+    async function getIngredients() {
+      try {
+        const response = await fetch("https://norma.nomoreparties.space/api/ingredients")
+        if(!response.ok) {
+          throw new Error("Response error")
+        }
+        const ingredientsData = await response.json();
+        setIngredients(ingredientsData.data)
 
-  render () {
-    const {data} = this.state
-    console.log(data)
-    return (
-      <>
+      } catch(e) {
+        console.log(e)
+      }
+      
+    }
+    getIngredients()
+  }, [])
+
+  return (
+    <>
       <AppHeader />
       <div className={styles.wrapper}>
-        <BurgerIngredients ingredients={data}/>
-        <BurgerConstructor ingredients={data}/>
+        <BurgerIngredients ingredients={ingredients}/>
+        <BurgerConstructor ingredients={ingredients}/>
       </div>
       
-      </>
+    </>
     )
   }
-}
+
