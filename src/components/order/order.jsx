@@ -4,20 +4,20 @@ import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-co
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 
-export default function Order() {
+export default function Order({total}) {
   const[isOpen, setOpen] = React.useState(false)
 
- const handleOpenModal = () => {
-   setOpen(true)
- }
+  const handleOpenModal = () => {
+    setOpen(true)
+  }
 
- const handleCloseModal = () => {
-  setOpen(false)
-}
+  const handleCloseModal = () => {
+    setOpen(false)
+  }
 
   return (
     <div className={orderStyles.order}>
-         <span className={orderStyles.price}>{this.props.total}
+         <span className={orderStyles.price}>{total}
          <CurrencyIcon type="primary"/>
          </span>
          <Button onClick={ handleOpenModal }>Оформить заказ</Button>

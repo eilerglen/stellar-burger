@@ -4,60 +4,34 @@ import { Tab, Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger
 import Ingredient from '../ingredient/ingredient';
 import Tabs from '../tabs/tabs';
 
-export default class BurgerIngredients extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      value: null,
-    }
-    this.bunTab = React.createRef();
-    this.sauceTab = React.createRef();
-    this.mainTab = React.createRef();
-  }
+export default function BurgerIngredients({ingredients}) {
+  const [currentTab, setCurrentTab] = React.useState('bun')
 
-  toggleTab(currentValue) {
-    this.setState({
-      value: currentValue
-    })
-  }
-   componentDidMount () {
-     
-    this.state.value = 'buns';
-  
-   }
+    const bunTab = React.useRef(null);
+    const sauceTab = React.useRef(null);
+    const mainTab = React.useRef(null);;
 
-   componentDidUpdate(prevProps, prevState) {
-    this.state.value === 'buns'
-      ? this.bunTab.current.scrollIntoView()
-      : this.state.value === 'sause'
-        ? this.sauceTab.current.scrollIntoView()
-        : this.mainTab.current.scrollIntoView()
-  }
+  React.useEffect(() => {
+    (currentTab === 'bun'
+        ? bunTab
+        : currentTab === 'sauce'
+            ? sauceTab
+            : mainTab)
+        .current.scrollIntoView()
+}, [currentTab])
 
-  render() {
-      const bun = this.props.ingredients.filter(ingredient => ingredient.type == 'bun')
-      const sause = this.props.ingredients.filter(ingredient => ingredient.type == 'sauce')
-      const main = this.props.ingredients.filter(ingredient => ingredient.type == 'main')
-
-      const bunTab = this.bunTab
-      const sauceTab = this.sauceTab
-      const mainTab = this.mainTab 
+      const bun = ingredients.filter(ingredient => ingredient.type == 'bun')
+      const sause = ingredients.filter(ingredient => ingredient.type == 'sauce')
+      const main = ingredients.filter(ingredient => ingredient.type == 'main')
+      
       return (  
         <section className={styles.ingredients}>
             <h1 className={styles.title}>Соберите бургер</h1>
+
             <div className={styles.tabItems}>
-              <Tabs value = {this.value} onclick = {this.toggleTab.bind(this)}/> 
-              {/* <div type = 'buns' className={styles.tabItem} 
-              onClick ={() =>{this.toggleTab('buns')}}>Булки</div>
-
-              <div type = 'sauce' className={styles.tabItem} 
-              onClick ={() =>{this.toggleTab('sauce')
-             }}>Соусы</div>
-
-              <div type = 'main' className={styles.tabItem} 
-              onClick ={() =>{this.toggleTab('main')}}>Начинки</div>
-            </div> */}
+              <Tabs current = {currentTab} onClick = {setCurrentTab}/> 
             </div>
+
             <div className={styles.scroller}>
               <h2 ref={bunTab} className={styles.title}>Булки</h2>
               <div className={styles.items} >
@@ -81,6 +55,5 @@ export default class BurgerIngredients extends React.Component {
             
         </section>       
       )
-  }
 }
 

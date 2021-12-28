@@ -6,30 +6,40 @@ import ModalOverlay from "../modal-overlay/modal-overlay";
 
 const modalRoot = document.getElementById('modal-root')
 
-export default function Modal({onClose}) {
+export default function Modal({children, onClose, title, isOpen}) {
+
+const ModalOverlayRef = React.useRef(null);
 
 const handleEscClose = (e) =>{
     if (e.keyCode === 27) {
-        this.props.onClose(e)
+        onClose(e)
     }
-}    
+} 
+
+const handleCloseOverlay = (e) => {
+    if(e.target === ModalOverlayRef.current) {
+        onClose(e)
+    }
+}
 
 React.useEffect(() => {
     document.addEventListener("keydown", handleEscClose)
+    document.addEventListener("click", handleCloseOverlay)
     return ()=> {
-        document.addEventListener("keydown", handleEscClose)
+        document.removeEventListener("keydown", handleEscClose)
+        document.removeEventListener("click", handleCloseOverlay)
     }
 })
 
     return createPortal (
         <>
-        <ModalOverlay onClick = {onClose}/>
+        <ModalOverlay overlayRef = { ModalOverlayRef} onClose = {onClose}/>
         <div className ={modalStyles.modal} >
-            <h2>{this.props.title}</h2>
+            <h2>{title}</h2>
             <button className={modalStyles.close} onClick={onClose}>
                 <CloseIcon type = 'primary'/>
             </button>
-            {this.props.children}
+            {children}
           
         </div>
         </>

@@ -5,30 +5,12 @@ import IngredientsList from "../ingredient-list/ingredient-list";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 
 
-export default class BurgerConstructor extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      fillers: this.props.ingredients.filter(item => item.type !== 'bun')
-    }
-  }
+export default function BurgerConstructor({ingredients}) {
+  const total = ingredients.reduce((acc, p) =>acc + p.price, 0)
+  const bun  = ingredients.find(item => item.type === 'bun')
 
-    componentDidMount() {
-      const data = this.props.ingredients.filter(item => item.type !== 'bun')
-      this.setState({
-        fillers: [] 
-      })
-    }
-
-    componentDidUpdate() {
-      
-    }
-    
-  render() {
-      const bun = this.props.ingredients.find(item => item.type === 'bun')
-      const total = this.props.ingredients.reduce((acc, p) =>acc + p.price, 0)
-      return ( 
-        <section className={styles.constructor}>
+  return ( 
+    <section className={styles.constructor}>
          {bun &&
           <ConstructorElement
             type ='top'
@@ -39,7 +21,7 @@ export default class BurgerConstructor extends React.Component {
           />
           } 
          <div className={styles.scroller}>
-                <IngredientsList data={this.props.ingredients.filter(item => item.type !== 'bun')} />
+                <IngredientsList data={ingredients.filter(item => item.type !== 'bun')} />
           </div>
           {bun &&  
           <ConstructorElement
@@ -51,9 +33,7 @@ export default class BurgerConstructor extends React.Component {
           />
           }
         <Order total={total}/> 
-        </section>
-        
-      )
-  }
+    </section>   
+  )
 }
 

@@ -1,20 +1,16 @@
 import React from "react";
-
 import navStyles from './nav-item.module.css'
 
-export default class NavItem extends React.Component {
-
-  render() {
+export default function NavItem({children, text}) {
     return (
       <a href = '/' className= {navStyles.link}>
 
         <span className = {navStyles.icon}> 
-          {this.props.children}
+          {children}
         </span>
         
-        <p> {this.props.text}</p>
+        <p>{text}</p>
       </a>
       
     )
-  }
 }
