@@ -1,30 +1,33 @@
-import React, {useContext} from "react";
+import React from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import styles from './burger-ingredients.module.css';
-import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Ingredient from '../ingredient/ingredient';
 import Tabs from '../tabs/tabs';
-import {IngredientsContext} from '../../utils/appContext'
+import { getIngredients } from '../../services/actions/ingredients'
+import {
+  GET_INGREDIENTS_REQUEST,
+  GET_INGREDIENTS_SUCCESS,
+  GET_INGREDIENTS_FAILED,
+} from '../../services/actions/ingredients'
 
 export default function BurgerIngredients() {
   const [currentTab, setCurrentTab] = React.useState('bun')
-  const dataIngredients = useContext(IngredientsContext)
+  const dispatch = useDispatch();
 
-    const bunTab = React.useRef(null);
-    const sauceTab = React.useRef(null);
-    const mainTab = React.useRef(null);;
+  const bunTab = React.useRef(null);
+  const sauceTab = React.useRef(null);
+  const mainTab = React.useRef(null);;
 
   React.useEffect(() => {
-    (currentTab === 'bun'
-        ? bunTab
-        : currentTab === 'sauce'
-            ? sauceTab
-            : mainTab)
-        .current.scrollIntoView()
-}, [currentTab])
+    dispatch(getIngredients)
+  }, [dispatch])
 
-      const bun = dataIngredients.filter(ingredient => ingredient.type == 'bun')
-      const sause = dataIngredients.filter(ingredient => ingredient.type == 'sauce')
-      const main = dataIngredients.filter(ingredient => ingredient.type == 'main')
+  const ingredients = useSelector((store) => store.ingredients.items);
+
+
+      const bun = ingredients.filter(ingredient => ingredient.type == 'bun')
+      const sause = ingredients.filter(ingredient => ingredient.type == 'sauce')
+      const main = ingredients.filter(ingredient => ingredient.type == 'main')
       
       return (  
         <section className={styles.ingredients}>

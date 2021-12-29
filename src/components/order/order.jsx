@@ -15,7 +15,7 @@ export default function Order({total}) {
   console.log(bun)
   const fillers = dataIngredients.filter(item => item.type !== 'bun')
   console.log(fillers)
-  const totalIds = [bun._id].concat(fillers.map(elem => elem._id))
+  const totalIds = fillers.map(elem => elem._id).concat(bun._id)
   console.log(totalIds)
 
   const getOrder=()=> {
