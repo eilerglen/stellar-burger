@@ -3,34 +3,33 @@ import AppHeader from '../app-header/app-header';
 import BurgerIngredients from '../burger-ingredients/burger-ingredients';
 import BurgerConstructor from '../burger-constructor/burger-constructor';
 import styles from './app.module.css';
+import {IngredientsContext} from '../../utils/appContext'
+import {getIngredientsData} from '../../utils/api'
 
 export default function App() {
   const [ingredients, setIngredients] = React.useState([])
-  
-  React.useEffect(() => {
-    async function getIngredients() {
-      try {
-        const response = await fetch("https://norma.nomoreparties.space/api/ingredients")
-        if(!response.ok) {
-          throw new Error("Response error")
-        }
-        const ingredientsData = await response.json();
-        setIngredients(ingredientsData.data)
+  const [isLoading, setIsLoadind] = React.useState(true)
 
-      } catch(e) {
-        console.log(e)
-      }
-      
-    }
-    getIngredients()
+  React.useEffect(() => {
+    getIngredientsData()
+    .then(res => {
+      console.log(res)
+      setIngredients(res)
+      setIsLoadind(false);
+    })
+    .catch((error) => {
+      setIsLoadind(false)
+    })
   }, [])
 
   return (
     <>
       <AppHeader />
       <div className={styles.wrapper}>
-        <BurgerIngredients ingredients={ingredients}/>
-        <BurgerConstructor ingredients={ingredients}/>
+      <IngredientsContext.Provider value={ingredients}>
+        <BurgerIngredients />
+        <BurgerConstructor />
+      </IngredientsContext.Provider>
       </div>
       
     </>

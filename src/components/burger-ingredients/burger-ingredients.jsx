@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import styles from './burger-ingredients.module.css';
-import { Tab, Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Ingredient from '../ingredient/ingredient';
 import Tabs from '../tabs/tabs';
+import {IngredientsContext} from '../../utils/appContext'
 
-export default function BurgerIngredients({ingredients}) {
+export default function BurgerIngredients() {
   const [currentTab, setCurrentTab] = React.useState('bun')
+  const dataIngredients = useContext(IngredientsContext)
 
     const bunTab = React.useRef(null);
     const sauceTab = React.useRef(null);
@@ -20,9 +22,9 @@ export default function BurgerIngredients({ingredients}) {
         .current.scrollIntoView()
 }, [currentTab])
 
-      const bun = ingredients.filter(ingredient => ingredient.type == 'bun')
-      const sause = ingredients.filter(ingredient => ingredient.type == 'sauce')
-      const main = ingredients.filter(ingredient => ingredient.type == 'main')
+      const bun = dataIngredients.filter(ingredient => ingredient.type == 'bun')
+      const sause = dataIngredients.filter(ingredient => ingredient.type == 'sauce')
+      const main = dataIngredients.filter(ingredient => ingredient.type == 'main')
       
       return (  
         <section className={styles.ingredients}>

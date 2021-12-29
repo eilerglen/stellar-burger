@@ -2,11 +2,12 @@ import React  from "react";
 import orderStyles from './order-details.module.css';
 import { ReactComponent as OrderDone } from '../../images/order-done.svg';
 
-export default function OrderDetails() {
+export default function OrderDetails({orderNumber}) {
+  const order = orderNumber;
     return (
       <>
       <span className={orderStyles.order_number}>
-        0345497
+       {order}
       </span>
       <span className={orderStyles.subtitle}>идентификатор заказа</span>
       <span className={orderStyles.icon}>

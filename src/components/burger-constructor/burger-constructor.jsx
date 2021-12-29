@@ -1,13 +1,16 @@
-import React from "react";
+import React, {useContext} from "react";
 import styles from './burger-constructor.module.css';
 import Order from '../order/order';
 import IngredientsList from "../ingredient-list/ingredient-list";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import {IngredientsContext} from '../../utils/appContext'
 
+export default function BurgerConstructor() {
+  const dataIngredients = useContext(IngredientsContext)
+  const total = dataIngredients.reduce((acc, p) =>acc + p.price, 0)
+  const bun = dataIngredients.find(item => item.type === 'bun')
+  const fillers = dataIngredients.filter(item => item.type !== 'bun')
 
-export default function BurgerConstructor({ingredients}) {
-  const total = ingredients.reduce((acc, p) =>acc + p.price, 0)
-  const bun  = ingredients.find(item => item.type === 'bun')
 
   return ( 
     <section className={styles.constructor}>
@@ -21,7 +24,7 @@ export default function BurgerConstructor({ingredients}) {
           />
           } 
          <div className={styles.scroller}>
-                <IngredientsList data={ingredients.filter(item => item.type !== 'bun')} />
+                <IngredientsList data={fillers} />
           </div>
           {bun &&  
           <ConstructorElement
@@ -32,7 +35,7 @@ export default function BurgerConstructor({ingredients}) {
             thumbnail={bun.image}
           />
           }
-        <Order total={total}/> 
+        <Order bun = {bun} fillers = {fillers} total={total}/> 
     </section>   
   )
 }
