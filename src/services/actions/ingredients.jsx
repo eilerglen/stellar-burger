@@ -10,10 +10,10 @@ export function getIngredients() {
       type: GET_INGREDIENTS_REQUEST
     })
     getIngredientsData()
-    .then((res) => {
+    .then((data) => {
       dispatch ({
         type: GET_INGREDIENTS_SUCCESS,
-        items: res.data
+        items: data
         })
     })  
       .catch((err) => {

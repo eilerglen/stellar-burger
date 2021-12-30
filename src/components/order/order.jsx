@@ -4,18 +4,21 @@ import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-co
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
 import { postOrder} from '../../utils/api'
-import {IngredientsContext} from '../../utils/appContext'
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Order({total}) {
   const[isOpen, setOpen] = React.useState(false)
   const [orderNumber, setOrderNumber] = React.useState(0)
-  const dataIngredients = useContext(IngredientsContext)
+  const {
+    items,
+    ingredientsRequest,
+    ingredientsFailed,
+  } = useSelector((state) => state.allIngredients);
+ 
 
-  const bun = dataIngredients.find(item => item.type === 'bun')
-  console.log(bun)
-  const fillers = dataIngredients.filter(item => item.type !== 'bun')
-  console.log(fillers)
-  const totalIds = fillers.map(elem => elem._id).concat(bun._id)
+  const bun = items.find(item => item.type === 'bun')
+  const fillers = items.filter(item => item.type !== 'bun')
+  const totalIds = fillers.map(elem => elem._id) //.concat(bun._id)
   console.log(totalIds)
 
   const getOrder=()=> {

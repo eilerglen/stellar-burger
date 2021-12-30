@@ -10,7 +10,7 @@ const initialState = {
   ingredientsFailed: false,
 }
 
-export const ingredientsReducer = (state = initialState, action) => {
+export const allIngredients = (state = initialState, action) => {
   switch (action.type) {
     case GET_INGREDIENTS_REQUEST: {
       return {...state, ingredientsRequest: true}

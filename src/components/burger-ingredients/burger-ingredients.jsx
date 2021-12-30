@@ -4,11 +4,6 @@ import styles from './burger-ingredients.module.css';
 import Ingredient from '../ingredient/ingredient';
 import Tabs from '../tabs/tabs';
 import { getIngredients } from '../../services/actions/ingredients'
-import {
-  GET_INGREDIENTS_REQUEST,
-  GET_INGREDIENTS_SUCCESS,
-  GET_INGREDIENTS_FAILED,
-} from '../../services/actions/ingredients'
 
 export default function BurgerIngredients() {
   const [currentTab, setCurrentTab] = React.useState('bun')
@@ -19,15 +14,20 @@ export default function BurgerIngredients() {
   const mainTab = React.useRef(null);;
 
   React.useEffect(() => {
-    dispatch(getIngredients)
+    dispatch(getIngredients())
   }, [dispatch])
 
-  const ingredients = useSelector((store) => store.ingredients.items);
+  const {
+    items,
+    ingredientsRequest,
+    ingredientsFailed,
+  } = useSelector((state) => state.allIngredients);
+  console.log(items)
 
 
-      const bun = ingredients.filter(ingredient => ingredient.type == 'bun')
-      const sause = ingredients.filter(ingredient => ingredient.type == 'sauce')
-      const main = ingredients.filter(ingredient => ingredient.type == 'main')
+      const bun = items.filter(ingredient => ingredient.type == 'bun')
+      const sause = items.filter(ingredient => ingredient.type == 'sauce')
+      const main = items.filter(ingredient => ingredient.type == 'main')
       
       return (  
         <section className={styles.ingredients}>
