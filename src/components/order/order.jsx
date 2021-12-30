@@ -1,44 +1,40 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import orderStyles from './order.module.css';
 import { Button, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../modal/modal";
 import OrderDetails from "../order-details/order-details";
-import { postOrder} from '../../utils/api'
 import { useSelector, useDispatch } from 'react-redux';
-
-export default function Order({total}) {
-  const[isOpen, setOpen] = React.useState(false)
-  const [orderNumber, setOrderNumber] = React.useState(0)
-  const {
-    items,
-    ingredientsRequest,
-    ingredientsFailed,
-  } = useSelector((state) => state.allIngredients);
+import {POST_ORDER_REQUEST,
+  POST_ORDER_SUCCESS,
+  POST_ORDER_FAILED,
+  REMOVE_ORDER, getOrder} from '../../services/actions/order'
  
+export default function Order({total}) {
 
+  const dispatch = useDispatch()
+  const[isOpen, setOpen] = React.useState(false)
+
+  const {items} = useSelector((state) => state.allIngredients);
+  const order = useSelector((state) => state.orderReducer.orderNum)
+  console.log(order)
   const bun = items.find(item => item.type === 'bun')
   const fillers = items.filter(item => item.type !== 'bun')
   const totalIds = fillers.map(elem => elem._id) //.concat(bun._id)
-  console.log(totalIds)
-
-  const getOrder=()=> {
-    postOrder(totalIds)
-    .then((res) => {
-      setOrderNumber(res.order.number)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }
-
   const handleOpenModal = () => {
-    setOpen(true)
-    getOrder()
-    console.log(orderNumber)
+    if(totalIds) {
+      dispatch(getOrder(totalIds))
+      setOpen(true)
+      console.log(order)
+    }
+    
   }
 
+ 
   const handleCloseModal = () => {
     setOpen(false)
+    dispatch({
+     type: REMOVE_ORDER,
+    })
   }
 
   return (
@@ -49,7 +45,7 @@ export default function Order({total}) {
          <Button onClick={ handleOpenModal }>Оформить заказ</Button>
          { isOpen &&
           <Modal isOpen = {isOpen} onClose = {handleCloseModal}>
-            <OrderDetails orderNumber = {orderNumber}/>
+            <OrderDetails />
           </Modal>
 
          }

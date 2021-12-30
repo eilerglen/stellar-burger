@@ -21,7 +21,7 @@ export default function BurgerIngredients() {
     items,
     ingredientsRequest,
     ingredientsFailed,
-  } = useSelector((state) => state.allIngredients);
+  } = useSelector((store) => store.allIngredients);
   console.log(items)
 
 

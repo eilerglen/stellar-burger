@@ -1,7 +1,10 @@
 import React  from "react";
+import store from "../../services/store";
 import detailStyles from './ingredients-details.module.css';
+import { useSelector } from "react-redux";
 
-export default function IngredientDetails({ingredientView}) {
+export default function IngredientDetails() {
+    const ingredientView = useSelector (store => store.ingredientDetailsReducer.ingredientDetails)
        return (
         <div className={detailStyles.detail}>
             <img src={ingredientView.image} alt={ingredientView.name}

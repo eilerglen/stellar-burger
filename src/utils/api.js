@@ -23,7 +23,7 @@ export const postOrder = async(arrayId) => {
   if (!response.ok) {
     throw new Error ('Fetch error')
   }
-  const order = await response.json()
-  return order;
+  const orderObject = await response.json()
+  return orderObject;
   
 }

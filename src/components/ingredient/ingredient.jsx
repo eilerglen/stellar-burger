@@ -2,21 +2,36 @@ import React from "react";
 import styles from './ingredient.module.css';
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../modal/modal";
-import IngredientDetails  from "../ingredients-details/ingredients-details";
+import IngredientDetails from "../ingredients-details/ingredients-details";
+import { useSelector, useDispatch } from "react-redux";
+import {
+    ADD_INGREDIENT_DETAILS,
+    REMOVE_INGREDIENT_DETAILS, 
+} from '../../services/actions/ingredient-details' 
 
 export default function Ingredient ({item}) {
-
+  const dispatch = useDispatch()
+  const {ingredientDetails} = useSelector(store => store.ingredientDetailsReducer) 
   const [isOpenModal,setIsOpenModal] = React.useState(false)
-  const [ingredientView, setIngredientView] = React.useState({})
+
 
   const openModal = (data) =>{
-   setIngredientView(data)
-   setIsOpenModal(true)
+    dispatch({
+      type: ADD_INGREDIENT_DETAILS,
+      ingredientDetails: data,
+    })
+    setIsOpenModal(true)
   }
 
   const handleClose = (e) =>{
     e.stopPropagation();
+    dispatch({
+      type: REMOVE_INGREDIENT_DETAILS,
+      ingredientDetails: {},
+    })
+    console.log(ingredientDetails)
     setIsOpenModal(false)
+
   }
 
   return (  
@@ -30,7 +45,7 @@ export default function Ingredient ({item}) {
         <p className={styles.text}>{item.name}</p>
         {isOpenModal && (
           <Modal title = 'Детали ингредиента' isOpen = {isOpenModal} onClose = {handleClose}>
-            <IngredientDetails ingredientView = {ingredientView}/>
+            <IngredientDetails />
           </Modal>
         )}
     </article>

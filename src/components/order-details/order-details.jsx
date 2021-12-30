@@ -1,9 +1,11 @@
 import React  from "react";
 import orderStyles from './order-details.module.css';
 import { ReactComponent as OrderDone } from '../../images/order-done.svg';
+import { useSelector } from "react-redux";
 
-export default function OrderDetails({orderNumber}) {
-  const order = orderNumber;
+export default function OrderDetails() {
+    const order = useSelector((state) => state.orderReducer.orderNum)
+
     return (
       <>
       <span className={orderStyles.order_number}>
