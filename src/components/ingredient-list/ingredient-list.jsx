@@ -4,18 +4,19 @@ import { useSelector } from "react-redux";
 
 export default function IngredientsList() {
    const { fillers } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
-
+  console.log(fillers)
     return ( 
       <ul className={ styles.main_container}>
-        {fillers && fillers.map((item) => (
-            <li className={ styles.list_item} key={item._id}>
+        {fillers && fillers.map((elem) => (
+            <li className={ styles.list_item} key={elem.constructorId}>
                <div className={ styles.item_container}>
                 <DragIcon type="primary" />
                 <ConstructorElement
-                  type={null}
-                  text={item.name}
-                  price={item.price}
-                  thumbnail={item.image}
+                  type={elem.item.type}
+                  text={elem.item.name}
+                  price={elem.item.price}
+                  thumbnail={elem.item.image}
+                  
             />
                 </div>
             </li>

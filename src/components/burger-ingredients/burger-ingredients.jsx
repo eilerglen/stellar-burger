@@ -22,7 +22,6 @@ export default function BurgerIngredients() {
     ingredientsRequest,
     ingredientsFailed,
   } = useSelector((store) => store.allIngredients);
-  console.log(items)
 
 
       const bun = items.filter(ingredient => ingredient.type == 'bun')

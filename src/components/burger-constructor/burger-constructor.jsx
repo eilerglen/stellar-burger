@@ -19,16 +19,14 @@ export default function BurgerConstructor() {
       isHover: monitor.isOver(),
     }),
     drop(item) {
-      addItem(item)
+      dispatch({
+        type: ADD_INGREDIENT_BURGER,
+        item: item.item,
+      })
     } 
   })
 
-  const addItem = (item) => {
-    dispatch({
-      type: ADD_INGREDIENT_BURGER,
-      item: item.item,
-    })
-  }
+ 
   //const total = items.reduce((acc, p) =>acc + p.price, 0)
 
   const border = isHover ? '2px dashed green' : 'none';

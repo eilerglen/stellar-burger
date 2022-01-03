@@ -9,16 +9,21 @@ import {POST_ORDER_REQUEST,
   POST_ORDER_FAILED,
   REMOVE_ORDER, getOrder} from '../../services/actions/order'
  
-export default function Order({total}) {
+export default function Order() {
+  const { bun } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
+  const { fillers } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
+  const countTotal = () => {
+    const total = bun.price 
+  ? (fillers.reduce((acc, p) => acc + p.item.price + bun.price*2))
+  : (fillers.reduce((acc, p) => acc + p.item.price, 0));
+    return total
+  }
+  
 
   const dispatch = useDispatch()
   const[isOpen, setOpen] = React.useState(false)
-
-  const {items} = useSelector((state) => state.allIngredients);
   const order = useSelector((state) => state.orderReducer.orderNum)
   //console.log(order)
-  const bun = items.find(item => item.type === 'bun')
-  const fillers = items.filter(item => item.type !== 'bun')
   const totalIds = fillers.map(elem => elem._id) //.concat(bun._id)
   const handleOpenModal = () => {
     if(totalIds) {
@@ -39,8 +44,9 @@ export default function Order({total}) {
 
   return (
     <div className={orderStyles.order}>
-         <span className={orderStyles.price}>{total}
-         <CurrencyIcon type="primary"/>
+         <span className={orderStyles.price}>
+          {console.log(countTotal)}<CurrencyIcon type="primary"/>
+          {countTotal}
          </span>
          <Button onClick={ handleOpenModal }>Оформить заказ</Button>
          { isOpen &&
