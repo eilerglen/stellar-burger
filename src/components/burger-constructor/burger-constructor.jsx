@@ -1,48 +1,46 @@
 import styles from './burger-constructor.module.css';
 import Order from '../order/order';
 import IngredientsList from "../ingredient-list/ingredient-list";
-import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useSelector, useDispatch } from 'react-redux';
-import { getIngredients } from '../../services/actions/ingredients'
-import {
-  GET_INGREDIENTS_REQUEST,
-  GET_INGREDIENTS_SUCCESS,
-  GET_INGREDIENTS_FAILED,
-} from '../../services/actions/ingredients'
+import { useDrop } from "react-dnd";
+import { ADD_INGREDIENT_BURGER } from '../../services/actions/constructor';
+import { Bun } from '../bun/bun';
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
-  const { items } = useSelector((state) => state.allIngredients);
+  const { bun } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
+  const { fillers } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
 
-  const total = items.reduce((acc, p) =>acc + p.price, 0)
-  const bun = items.find(item => item.type === 'bun')
-  const fillers = items.filter(item => item.type !== 'bun')
+  console.log(bun)
+  console.log(fillers)
+  const[{isHover}, dropRef] = useDrop({
+    accept: 'ingredient',
+    collect: (monitor) => ({
+      isHover: monitor.isOver(),
+    }),
+    drop(item) {
+      addItem(item)
+    } 
+  })
 
+  const addItem = (item) => {
+    dispatch({
+      type: ADD_INGREDIENT_BURGER,
+      item: item.item,
+    })
+  }
+  //const total = items.reduce((acc, p) =>acc + p.price, 0)
+
+  const border = isHover ? '2px dashed green' : 'none';
 
   return ( 
-    <section className={styles.constructor}>
-         {bun &&
-          <ConstructorElement
-            type ='top'
-            isLocked = {true}
-            text={bun.name}
-            price={bun.price}
-            thumbnail={bun.image}
-          />
-          } 
+    <section className={styles.constructor} ref = {dropRef} style={{ border }} >
+        <Bun position ="top" ></Bun>
          <div className={styles.scroller}>
-                <IngredientsList data={fillers} />
+                <IngredientsList  />
           </div>
-          {bun &&  
-          <ConstructorElement
-            type ='bottom'
-            isLocked = {true}
-            text={bun.name}
-            price={bun.price}
-            thumbnail={bun.image}
-          />
-          }
-        <Order bun = {bun} fillers = {fillers} total={total}/> 
+          <Bun position ="bottom" ></Bun>
+        <Order /> 
     </section>   
   )
 }

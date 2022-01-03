@@ -8,11 +8,21 @@ import {
     ADD_INGREDIENT_DETAILS,
     REMOVE_INGREDIENT_DETAILS, 
 } from '../../services/actions/ingredient-details' 
+import { useDrag } from "react-dnd";
+
 
 export default function Ingredient ({item}) {
   const dispatch = useDispatch()
   const {ingredientDetails} = useSelector(store => store.ingredientDetailsReducer) 
   const [isOpenModal,setIsOpenModal] = React.useState(false)
+
+  const [{opacity}, dragRef] = useDrag({
+    type: 'ingredient',
+    item: {item}, 
+    collect: monitor => ({
+      isDrag: monitor.isDragging()? 0.5 : 1
+    })
+  })
 
 
   const openModal = (data) =>{
@@ -35,7 +45,7 @@ export default function Ingredient ({item}) {
   }
 
   return (  
-    <article className={styles.item} key={item._id} onClick = {() => openModal(item) }>
+    <article className={styles.item} key={item._id} onClick = {() => openModal(item) } ref ={dragRef} style={opacity}>
         <picture className={styles.picture}>
             <source media="(max-width: 599px)" srcSet={item.image_mobile} />
             <source media="(min-width: 600px)" srcSet={item.image_large} />

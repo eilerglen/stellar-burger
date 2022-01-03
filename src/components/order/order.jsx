@@ -16,7 +16,7 @@ export default function Order({total}) {
 
   const {items} = useSelector((state) => state.allIngredients);
   const order = useSelector((state) => state.orderReducer.orderNum)
-  console.log(order)
+  //console.log(order)
   const bun = items.find(item => item.type === 'bun')
   const fillers = items.filter(item => item.type !== 'bun')
   const totalIds = fillers.map(elem => elem._id) //.concat(bun._id)

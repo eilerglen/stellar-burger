@@ -1,16 +1,13 @@
-import React from "react";
 import { ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './ingredient-list.module.css';
+import { useSelector } from "react-redux";
 
-export default class IngredientsList extends React.Component {
-  constructor(props){
-    super(props); 
-  }
-  
-  render() {
-      return ( 
-        <ul className={ styles.main_container}>
-        {this.props.data.map((item) => (
+export default function IngredientsList() {
+   const { fillers } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
+
+    return ( 
+      <ul className={ styles.main_container}>
+        {fillers && fillers.map((item) => (
             <li className={ styles.list_item} key={item._id}>
                <div className={ styles.item_container}>
                 <DragIcon type="primary" />
@@ -24,7 +21,6 @@ export default class IngredientsList extends React.Component {
             </li>
         ))
         }
-    </ul>
-      )
-  }
+      </ul>
+  )
 }
