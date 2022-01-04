@@ -1,0 +1,15 @@
+.item_container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: flex-end;
+  list-style: none;
+  cursor: move;
+}
+
+.list-item {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}

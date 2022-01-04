@@ -15,8 +15,7 @@ const initialState = {
 
 export const burgerIngredientsReducer = (state = initialState, action) => {
   switch(action.type) {
-   
-     case  ADD_INGREDIENT_BURGER: {
+    case  ADD_INGREDIENT_BURGER: {
         const item = action.item
         if (item.type === 'bun') {
           const bunId = state.sortedCart.bun._id;
@@ -27,8 +26,14 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
         }
        return {...state, bun: action.bun}
      }
-     case REMOVE_ALL_INGREDIENTS_BURGER: {
+    case REMOVE_ALL_INGREDIENTS_BURGER: {
        return initialState
+     }
+    case  REMOVE_INGREDIENT_BURGER: {
+      const itemIndex = action.id
+      const newFillers = [...state.sortedCart.fillers]
+      newFillers.splice(itemIndex, 1)
+      state.sortedCart.fillers = newFillers
      }
     default: {
       return state
