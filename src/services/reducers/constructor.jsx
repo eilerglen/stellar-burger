@@ -29,12 +29,15 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
     case REMOVE_ALL_INGREDIENTS_BURGER: {
        return initialState
      }
-    case  REMOVE_INGREDIENT_BURGER: {
-      const itemIndex = action.id
-      const newFillers = [...state.sortedCart.fillers]
-      newFillers.splice(itemIndex, 1)
-      state.sortedCart.fillers = newFillers
-     }
+    case REMOVE_INGREDIENT_BURGER: {
+      return {...state, sortedCart: {
+        ...state.sortedCart,
+            fillers:[
+              ...state.sortedCart.fillers
+            ].filter((item, index) => index != action.index)
+
+      }}
+    }
     default: {
       return state
     }

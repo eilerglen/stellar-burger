@@ -14,8 +14,10 @@ export function  getOrder(arrayId) {
     .then((res) => {
       dispatch({
         type: POST_ORDER_SUCCESS,
-        orderNum: res.order.number
+        order: res,
+        
       })
+      
     })
     .catch((error) => {
       dispatch({

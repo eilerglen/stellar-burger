@@ -11,8 +11,6 @@ export default function BurgerConstructor() {
   const { bun } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
   const { fillers } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
 
-  console.log(bun)
-  console.log(fillers)
   const[{isHover}, dropRef] = useDrop({
     accept: 'ingredient',
     collect: (monitor) => ({

@@ -6,7 +6,7 @@ import {
 } from '../actions/order.jsx'
 
 const initialState = {
-  orderNum: null,
+  order: {},
   isLoading: false,
   hasError: false
 }
@@ -21,7 +21,7 @@ export const orderReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         hasError: false,
-        orderNum: action.orderNum,
+        order: action.order,
       }  
     }
     case POST_ORDER_FAILED: {

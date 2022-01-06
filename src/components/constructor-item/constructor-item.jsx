@@ -10,13 +10,15 @@ import { REMOVE_INGREDIENT_BURGER } from '../../services/actions/constructor';
 
 export const ConstructorItem = ({id, item, type, index}) => {
   const dispatch = useDispatch()
+  const { fillers } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
   const ref = useRef(null)
 
   const handleRemove = () => {
     dispatch({
       type: REMOVE_INGREDIENT_BURGER,
-      itemIndex: index,
+      index: index,
     })
+    
   }
   return (
     <li className = {styles.item_container} ref = {ref}>

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { ConstructorItem } from "../constructor-item/constructor-item";
 export default function IngredientsList() {
    const { fillers } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
-  console.log(fillers)
+   
     return ( 
       <ul className={ styles.main_container}>
         {fillers && fillers.map((elem, index) => (

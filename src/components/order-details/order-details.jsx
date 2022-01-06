@@ -1,15 +1,14 @@
-import React  from "react";
 import orderStyles from './order-details.module.css';
 import { ReactComponent as OrderDone } from '../../images/order-done.svg';
 import { useSelector } from "react-redux";
 
-export default function OrderDetails() {
-    const order = useSelector((state) => state.orderReducer.orderNum)
+export default function OrderDetails({order}) {
+    //const order = useSelector((state) => state.orderReducer.orderNum)
 
     return (
       <>
       <span className={orderStyles.order_number}>
-       {order}
+       { order }
       </span>
       <span className={orderStyles.subtitle}>идентификатор заказа</span>
       <span className={orderStyles.icon}>
