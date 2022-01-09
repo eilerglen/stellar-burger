@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from './ingredient.module.css';
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import Modal from "../modal/modal";
@@ -12,12 +12,22 @@ import { useDrag } from "react-dnd";
 
 
 export default function Ingredient ({item}) {
+  //const [countBun, setCountBun] = React.useState(0)
   const { bun } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
   const { fillers } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
   const dispatch = useDispatch()
   const {ingredientDetails} = useSelector(store => store.ingredientDetailsReducer) 
   const [isOpenModal,setIsOpenModal] = React.useState(false)
 
+ 
+  const countBun = () => {
+    if(item.type === 'bun') {
+      if(bun._id && item._id === bun._id) {
+        return 2
+      }
+    }
+  }
+  console.log(countBun)
   const [{opacity}, dragRef] = useDrag({
     type: 'ingredient',
     item: {item}, 
@@ -45,11 +55,16 @@ export default function Ingredient ({item}) {
     setIsOpenModal(false)
 
   }
-  const bunCopy = bun
-  const constructorItems = [bun].concat(fillers)
-  console.log(constructorItems)
+
+
+
+  console.log(fillers)
+  const count = () => {
+    return fillers.reduce((acc, el) => el.item._id === item._id ? acc + 1 : acc, 0)
+  }
   return (  
     <article className={styles.item} key={item._id} onClick = {() => openModal(item) } ref ={dragRef} style={opacity}>
+         { <Counter count={item.type === 'bun' ? countBun() > 0 && countBun() : count()} />}
         <picture className={styles.picture}>
             <source media="(max-width: 599px)" srcSet={item.image_mobile} />
             <source media="(min-width: 600px)" srcSet={item.image_large} />

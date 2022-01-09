@@ -7,14 +7,14 @@ export const Bun = ({position})=> {
   const positionText = position === 'top' ? '(верх)': '(низ)'
   console.log(bun)
   return (
-    <div className={!bun.constructor ? bunStyles.bun_empty : bunStyles.bun}>
-    {bun.constructorId
+    <div className={!bun._id ? bunStyles.bun_empty : bunStyles.bun}>
+    {bun._id
         ? <ConstructorElement
             type={position}
             isLocked={true}
-            text={`${bun.item.name} ${positionText}`}
-            price={bun.item.price}
-            thumbnail={bun.item.image}
+            text={`${bun.name} ${positionText}`}
+            price={bun.price}
+            thumbnail={bun.image}
         />
         :
         <ConstructorElement

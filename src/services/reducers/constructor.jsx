@@ -1,5 +1,4 @@
 import {
-  ADD_BUN_BURGER,
   ADD_INGREDIENT_BURGER,
   REMOVE_INGREDIENT_BURGER,
   REMOVE_ALL_INGREDIENTS_BURGER,
@@ -21,7 +20,7 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
             ...state, 
             sortedCart: {
               ...state.sortedCart,
-              bun: {item, constructorId: Date.now().toString(36)}
+              bun: item
            }
           }
         } else {
