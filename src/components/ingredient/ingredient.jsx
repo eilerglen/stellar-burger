@@ -12,6 +12,8 @@ import { useDrag } from "react-dnd";
 
 
 export default function Ingredient ({item}) {
+  const { bun } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
+  const { fillers } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
   const dispatch = useDispatch()
   const {ingredientDetails} = useSelector(store => store.ingredientDetailsReducer) 
   const [isOpenModal,setIsOpenModal] = React.useState(false)
@@ -24,7 +26,7 @@ export default function Ingredient ({item}) {
     })
   })
 
-
+  console.log(bun)
   const openModal = (data) =>{
     dispatch({
       type: ADD_INGREDIENT_DETAILS,

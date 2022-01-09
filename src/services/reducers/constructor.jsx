@@ -19,12 +19,27 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
         const item = action.item
         if (item.type === 'bun') {
           const bunId = state.sortedCart.bun._id;
-          state.sortedCart.bun = item
+          return {
+            ...state, 
+            sortedCart: {
+              ...state.sortedCart,
+              bun: item
+           }
+          }
         } else {
-          const newFillers = [...state.sortedCart.fillers,{ item, constructorId: Date.now().toString(36) + Math.random().toString(36).substr(2)}]
-          state.sortedCart.fillers = newFillers
+          return {
+            ...state,
+            sortedCart: {
+              ...state.sortedCart,
+              fillers:[
+                ...state.sortedCart.fillers, { item, constructorId: Date.now().toString(36) + Math.random().toString(36).substr(2)}
+              ]
+            }
+          }
+          // const newFillers = [...state.sortedCart.fillers,{ item, constructorId: Date.now().toString(36) + Math.random().toString(36).substr(2)}]
+          // state.sortedCart.fillers = newFillers
         }
-       return {...state, bun: action.bun}
+       
      }
     case REMOVE_ALL_INGREDIENTS_BURGER: {
        return initialState
