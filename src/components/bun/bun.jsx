@@ -4,18 +4,17 @@ import {useSelector} from 'react-redux' ;
 
 export const Bun = ({position})=> {
   const { bun } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
-  const isEmpty = !bun._id
   const positionText = position === 'top' ? '(верх)': '(низ)'
-
+  console.log(bun)
   return (
-    <div className={isEmpty ? bunStyles.bun_empty : bunStyles.bun}>
-    {!isEmpty 
+    <div className={!bun.constructor ? bunStyles.bun_empty : bunStyles.bun}>
+    {bun.constructorId
         ? <ConstructorElement
             type={position}
             isLocked={true}
-            text={`${bun.name} ${positionText}`}
-            price={bun.price}
-            thumbnail={bun.image}
+            text={`${bun.item.name} ${positionText}`}
+            price={bun.item.price}
+            thumbnail={bun.item.image}
         />
         :
         <ConstructorElement

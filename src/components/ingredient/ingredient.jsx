@@ -45,7 +45,9 @@ export default function Ingredient ({item}) {
     setIsOpenModal(false)
 
   }
-
+  const bunCopy = bun
+  const constructorItems = [bun].concat(fillers)
+  console.log(constructorItems)
   return (  
     <article className={styles.item} key={item._id} onClick = {() => openModal(item) } ref ={dragRef} style={opacity}>
         <picture className={styles.picture}>
