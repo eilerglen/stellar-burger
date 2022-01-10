@@ -1,4 +1,4 @@
-import { ConstructorElement, DragIcon} from "@ya.praktikum/react-developer-burger-ui-components";
+
 import styles from './ingredient-list.module.css';
 import { useSelector } from "react-redux";
 import { ConstructorItem } from "../constructor-item/constructor-item";

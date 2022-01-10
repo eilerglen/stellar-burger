@@ -22,7 +22,7 @@ export default function BurgerIngredients() {
     ingredientsRequest,
     ingredientsFailed,
   } = useSelector((store) => store.allIngredients);
-
+  console.log(items)
 
       const bun = items.filter(ingredient => ingredient.type == 'bun')
       const sause = items.filter(ingredient => ingredient.type == 'sauce')
@@ -40,19 +40,19 @@ export default function BurgerIngredients() {
               <h2 ref={bunTab} className={styles.title}>Булки</h2>
               <div className={styles.items} >
                   {bun.map((ingredient)=>(
-                    <Ingredient item = {ingredient} key ={ingredient._id}/>
+                    <Ingredient item = {ingredient} key ={ingredient._id} />
                   ))}
               </div>
               <h2 ref={sauceTab} className={styles.title}>Соусы</h2>
               <div className={styles.items} >
                   {sause.map((ingredient)=>(
-                    <Ingredient item = {ingredient} key ={ingredient._id}/>
+                    <Ingredient item = {ingredient} key ={ingredient._id} />
                   ))}
               </div>
               <h2 ref={mainTab} className={styles.title}>Начинки</h2>
               <div  className={styles.items} >
                   {main.map((ingredient)=>(
-                    <Ingredient item = {ingredient} key ={ingredient._id}/>
+                    <Ingredient item = {ingredient} key ={ingredient._id} />
                   ))}
               </div>
             </div>

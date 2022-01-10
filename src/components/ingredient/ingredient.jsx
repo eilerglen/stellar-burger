@@ -12,6 +12,7 @@ import { useDrag } from "react-dnd";
 
 
 export default function Ingredient ({item}) {
+  const {id} = item
   const { bun } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
   const { fillers } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
   const dispatch = useDispatch()
@@ -20,13 +21,11 @@ export default function Ingredient ({item}) {
 
   const [{opacity}, dragRef] = useDrag({
     type: 'ingredient',
-    item: {item}, 
+    item: item, 
     collect: monitor => ({
       isDrag: monitor.isDragging()? 0.5 : 1
     })
   })
-
-  console.log(bun)
   const openModal = (data) =>{
     dispatch({
       type: ADD_INGREDIENT_DETAILS,
