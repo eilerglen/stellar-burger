@@ -6,36 +6,55 @@ import { useSelector, useDispatch } from 'react-redux';
 import { REMOVE_ORDER, getOrder} from '../../services/actions/order'
 import { REMOVE_ALL_INGREDIENTS_BURGER } from '../../services/actions/constructor'  
 import { useModal } from "../../utils/customHooks"; 
+import { useEffect, useMemo, useState } from 'react';
 
 
 export default function Order() {
+  const [total, setTotal] = useState(0)
   const { bun, fillers } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
   const {order} = useSelector((store) => store.orderReducer);
   const orderNumber = order && order.order && order.order.number
   const dispatch = useDispatch()
   const {openingModal, closingModal} = useModal();
-  const itemsArr = fillers.map(elem => elem.item._id)
-  const idArray = () => {
-  
+
+  //Создаем массив из ID
+  const idArray = useMemo(() => {
     const itemsArr = fillers.map(elem => elem.item._id)
-   
-    if(bun) {
+    if(bun._id) {
       itemsArr.push(bun._id)
     }
     return itemsArr
-  }
+  }, [fillers, bun])
+
+  //Флаг активации и деактивации кнопки
 
   const isDisabled = bun._id && idArray.length > 1 ? true : false;
+  console.log(bun.price)
+  //Считаем итоговую стоимость в конструкторе
+  const countTotal = useMemo(() =>{
+    const total = bun.price 
 
+    ? (fillers.reduce((acc, p) => acc + p.item.price, 0) + bun.price * 2)
+    : (fillers.reduce((acc, p) => acc + p.item.price, 0));
+    return total
+}, [bun, fillers])
+
+  useEffect(() => {
+    bun
+    ? setTotal(fillers.reduce((acc, p) => acc + p.item.price, 0) + bun.price * 2)
+    : setTotal(fillers.reduce((acc, p) => acc + p.item.price, 0));
+     
+  }, [bun, fillers])
+  //Отправляем массив ID на сервер и получаем сгенерированный номер заказа
   const handleOpenModal = () => {
-    if(itemsArr ) {
-      dispatch(getOrder(idArray()))
+    if(idArray) {
+      dispatch(getOrder(idArray))
       openingModal()
       console.log(fillers)
     }
     
   }
-
+  //Очищаем стейт ордера и стейт конструктора
   const handleCloseModal = () => {
     closingModal()
     dispatch({
@@ -47,19 +66,12 @@ export default function Order() {
 
   }
 
-  const countTotal = () => {
-    const total = bun.price 
-  ? (fillers.reduce((acc, p) => acc + p.item.price + bun.price*2))
-  : (fillers.reduce((acc, p) => acc + p.item.price, 0));
-    return total
-  }
-  
   return (
     <div className={orderStyles.order}>
          <span className={orderStyles.price}>
          {countTotal}&nbsp;<CurrencyIcon type="primary"/>
          </span>
-         <Button onClick={ handleOpenModal }>Оформить заказ</Button>
+         <Button disabled = {!isDisabled ? "disabled" : ""} onClick={ handleOpenModal }>Оформить заказ</Button>
          {  orderNumber &&
           <Modal onClose = {handleCloseModal}>
             <OrderDetails order = { orderNumber }/>
