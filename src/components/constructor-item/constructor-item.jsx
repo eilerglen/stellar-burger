@@ -8,7 +8,6 @@ import { REMOVE_INGREDIENT_BURGER, MOVE_INGREDIENT_BURGER } from '../../services
 export const ConstructorItem = ({id, item, type, index}) => {
   const dispatch = useDispatch()
   const ref = useRef(null)
-  console.log(index)
   
   const handleRemove = () => {
     dispatch({
@@ -24,14 +23,15 @@ export const ConstructorItem = ({id, item, type, index}) => {
 
       const dragIndex = item.index
       const hoverIndex = index
+      console.log(hoverIndex, dragIndex)
     
-      const hoverBoundingRect = ref.current?.getBoundingClientRect()
-      const hoverMiddle = (hoverBoundingRect.bottom - hoverBoundingRect.top)/2 
-      const clientOffset = monitor.getClientOffset()
-      const hoverClientY = clientOffset.y - hoverBoundingRect.top
+      // const hoverBoundingRect = ref.current?.getBoundingClientRect()
+      // const hoverMiddle = (hoverBoundingRect.bottom - hoverBoundingRect.top)/2 
+      // const clientOffset = monitor.getClientOffset()
+      // const hoverClientY = clientOffset.y - hoverBoundingRect.top
 
-      if(dragIndex < hoverIndex && hoverClientY < hoverMiddle) return
-      if(dragIndex > hoverIndex && hoverClientY > hoverMiddle) return
+      // if(dragIndex < hoverIndex && hoverClientY < hoverMiddle) return
+      // if(dragIndex > hoverIndex && hoverClientY > hoverMiddle) return
 
 
       dispatch({
@@ -39,7 +39,7 @@ export const ConstructorItem = ({id, item, type, index}) => {
         dragIndex: dragIndex,
         hoverIndex: hoverIndex
       })
-      item.index = hoverIndex
+      // item.index = hoverIndex
     },
   
   })
