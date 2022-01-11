@@ -33,17 +33,10 @@ export default function Order() {
   //Флаг активации и деактивации кнопки
 
   const isDisabled = bun._id && idArray.length > 1 ? true : false;
-  console.log(bun.price);
-  //Считаем итоговую стоимость в конструкторе
-  const countTotal = useMemo(() => {
-    const total = bun.price
-      ? fillers.reduce((acc, p) => acc + p.item.price, 0) + bun.price * 2
-      : fillers.reduce((acc, p) => acc + p.item.price, 0);
-    return total;
-  }, [bun, fillers]);
 
+  //Считаем итоговую стоимость в конструкторе
   useEffect(() => {
-    bun
+    bun && bun.price
       ? setTotal(
           fillers.reduce((acc, p) => acc + p.item.price, 0) + bun.price * 2
         )
@@ -71,7 +64,7 @@ export default function Order() {
   return (
     <div className={orderStyles.order}>
       <span className={orderStyles.price}>
-        {countTotal}&nbsp;
+        {total}&nbsp;
         <CurrencyIcon type="primary" />
       </span>
       <Button

@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux' ;
 export const Bun = ({position})=> {
   const { bun } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
   const positionText = position === 'top' ? '(верх)': '(низ)'
-  console.log(bun)
+ 
   return (
     <div className={!bun._id ? bunStyles.bun_empty : bunStyles.bun}>
     {bun._id

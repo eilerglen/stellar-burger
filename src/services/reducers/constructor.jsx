@@ -2,6 +2,7 @@ import {
   ADD_INGREDIENT_BURGER,
   REMOVE_INGREDIENT_BURGER,
   REMOVE_ALL_INGREDIENTS_BURGER,
+  MOVE_INGREDIENT_BURGER,
 } from '../actions/constructor'
 
 const initialState = {
@@ -48,6 +49,21 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
             ].filter((item, index) => index != action.index)
 
       }}
+    }
+    case MOVE_INGREDIENT_BURGER: {
+
+      const updatedIngredients = [...state.sortedCart.fillers]
+      const dragItem = state.sortedCart.fillers[action.dragIndex]
+      const hoverItem = state.sortedCart.fillers[action.hoverIndex]
+      updatedIngredients[action.dragIndex] = hoverItem
+      updatedIngredients[action.hoverIndex] = dragItem
+
+      return {...state, sortedCart: {
+          ...state.sortedCart,
+          fillers: updatedIngredients
+        }
+      }
+
     }
     default: {
       return state

@@ -7,25 +7,26 @@ import { ADD_INGREDIENT_BURGER } from '../../services/actions/constructor';
 import { Bun } from '../bun/bun';
 
 export default function BurgerConstructor() {
-  const dispatch = useDispatch();
-  const { bun } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
-  const { fillers } = useSelector((store) => store.burgerIngredientsReducer.sortedCart);
 
-  const[{isHover}, dropRef] = useDrop({
+  const dispatch = useDispatch();
+  const[{isHover, handlerId}, dropRef] = useDrop({
     accept: 'ingredient',
-    collect: (monitor) => ({
+    collect: (monitor, connect) => ({
       isHover: monitor.isOver(),
+      handlerId: monitor.getHandlerId(),
+      itemId: monitor.getItem()
     }),
     drop(item) {
       dispatch({
         type: ADD_INGREDIENT_BURGER,
         item: item
       })
+      console.log(handlerId)
     } 
   })
-  console.log(fillers)
- 
-  const border = isHover ? '2px dashed green' : 'none';
+
+
+  const border = isHover ? '5px solid green' : 'none';
 
   return ( 
     <section className={styles.constructor} ref = {dropRef} style={{ border }} >
