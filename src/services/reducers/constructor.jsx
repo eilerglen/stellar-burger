@@ -52,18 +52,17 @@ export const burgerIngredientsReducer = (state = initialState, action) => {
     }
     case MOVE_INGREDIENT_BURGER: {
 
-      const updatedIngredients = [...state.sortedCart.fillers]
+      const updatedFillers = [...state.sortedCart.fillers]
       const dragItem = state.sortedCart.fillers[action.dragIndex]
       const hoverItem = state.sortedCart.fillers[action.hoverIndex]
-      updatedIngredients[action.dragIndex] = hoverItem
-      updatedIngredients[action.hoverIndex] = dragItem
+      updatedFillers[action.dragIndex] = hoverItem
+      updatedFillers[action.hoverIndex] = dragItem
 
       return {...state, sortedCart: {
           ...state.sortedCart,
-          fillers: updatedIngredients
-        }
+          fillers: updatedFillers,
+           }
       }
-
     }
     default: {
       return state
