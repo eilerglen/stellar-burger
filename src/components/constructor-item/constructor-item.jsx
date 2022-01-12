@@ -22,16 +22,18 @@ export const ConstructorItem = ({id, item, type, index}) => {
     hover(item, monitor) {
 
       const dragIndex = item.index
-      const hoverIndex = index
-      console.log(hoverIndex, dragIndex)
-    
+      const hoverIndex = index    
+      
       // const hoverBoundingRect = ref.current?.getBoundingClientRect()
+      // console.log(hoverBoundingRect.top)
       // const hoverMiddle = (hoverBoundingRect.bottom - hoverBoundingRect.top)/2 
+      
       // const clientOffset = monitor.getClientOffset()
+      // console.log(clientOffset.y)
       // const hoverClientY = clientOffset.y - hoverBoundingRect.top
-
-      // if(dragIndex < hoverIndex && hoverClientY < hoverMiddle) return
-      // if(dragIndex > hoverIndex && hoverClientY > hoverMiddle) return
+      // console.log(hoverClientY, hoverMiddle)
+      // if (dragIndex < hoverIndex && hoverClientY < hoverMiddle) return
+      // if (dragIndex > hoverIndex && hoverClientY > hoverMiddle) return
 
 
       dispatch({
@@ -39,7 +41,7 @@ export const ConstructorItem = ({id, item, type, index}) => {
         dragIndex: dragIndex,
         hoverIndex: hoverIndex
       })
-      // item.index = hoverIndex
+      item.index = hoverIndex
     },
   
   })
